@@ -1,0 +1,30 @@
+---
+title: "Progress Memo "
+subtitle: |
+  | Final Project 
+  | Data Visualization (STAT 302)
+author: "Kimberly Wang"
+date: today
+
+format:
+  html:
+    toc: true
+    embed-resources: true
+    
+execute:
+  echo: false
+  warning: false
+
+from: markdown+emoji 
+reference-location: margin
+citation-location: margin
+---
+
+::: {.callout-tip icon=false}
+
+## Github Repo Link
+
+
+[https://github.com/kimberlyxw/stats-302-final-project.git](https://github.com/kimberlyxw/stats-302-final-project.git)
+
+:::
