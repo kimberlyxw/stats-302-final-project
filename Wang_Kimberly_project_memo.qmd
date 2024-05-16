@@ -28,3 +28,40 @@ citation-location: margin
 [https://github.com/kimberlyxw/stats-302-final-project.git](https://github.com/kimberlyxw/stats-302-final-project.git)
 
 :::
+
+
+## Data source
+
+This dataset was found on Kaggle.^[Ramin Huseyn (2024). Airline Customer Satisfication. Location: Kaggle ](https://www.kaggle.com/datasets/raminhuseyn/airline-customer-satisfaction/data)]
+
+The dataset was provided by Ramin Huseyn, and it was last updated on May 6th, 2024. 
+
+## Basic data description
+
+This dataset was collected from an unnamed airline company, and it focuses on customer satisfaction levels. This dataset can be analyzed and used to determine how various aspects of a customer and their trip can affect their overall satisfaction levels with the airline. 
+
+The data itself has no missingness except in the arrival delay in minutes variable. After some initial analysis, it does not seem like there is a consistent pattern in this missingness. The missingness is also relatively low, so this may be due to data collection or entry issues. Perhaps data on departure is more readily available because it might be more important for certain operations, but arrival data on the other hand is not as relevant. However, it could also be due to human error, since it is such a minor amount of missingness. In my data cleaning process, I simply removed this missingness. 
+
+There are 129,880 observations. There are 22 columns, and out of these variables 4 are character variables and 18 are technically numeric. However, 
+
+
+
+# no missing 
+# 129880 rows aka observations
+# 22 columns 
+# 4 character variables 
+# 18 numeric but many of them are still categorical 
+
+
+## Why this data
+
+Response here.
+
+## Visualization plan
+
+Response here.
+
+## Misc
+
+Response here.
+
