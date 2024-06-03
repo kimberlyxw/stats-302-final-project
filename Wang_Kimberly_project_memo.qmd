@@ -28,10 +28,9 @@ citation-location: margin
 
 :::
 
-
 ## Data source
 
-This dataset was found on Kaggle.^[Ramin Huseyn (2024). Airline Customer Satisfication. Location: Kaggle ](https://www.kaggle.com/datasets/raminhuseyn/airline-customer-satisfaction/data)]
+This dataset was found on Kaggle.^[Ramin Huseyn (2024). Airline Customer Satisfication. Location: Kaggle [https://github.com/kimberlyxw/stats-302-final-project.git](https://github.com/kimberlyxw/stats-302-final-project.git)]
 
 The dataset was provided by Ramin Huseyn, and it was last updated on May 6th, 2024. 
 
@@ -51,9 +50,16 @@ I also liked this dataset because there are both numeric and character variables
 
 ## Visualization plan
 
-Response here.
 
-## Misc
+First, I want to have a graph (or perhaps multiple) that will either be a density overlap plot or a ridge plot of the service satisfaction ratings. The goal would be to display the distribution of service ratings for each service feature like seat comfort, cleanliness, food and drink, etc. Each service will be represented in a different color for clarity. If the graph becomes too crowded, I will split the data into multiple graphs to maintain readability.
 
-Response here.
+Next, I would like a graph that shows the differences in overall ratings by travel class. I would compare the average or distribution of ratings across the different travel classes like economy and business. I believe that boxplots or violin plots would be the best option to show these relationships, because they would show the differences between the medians and quartiles of the various travel classes. The challenge lies in managing the multitude of variables; I may need to select only the most pertinent categories or divide the data into a series of plots. This section would definitely not be just one box plot, but most likely a collection of them and specifically for a series of categories that are most related to differences in travel classes (like seat comfort). 
+
+Finally, I plan to have one of the graphs that illustrates the relationship between customer satisfaction (satisfied vs. unsatisfied) and various customer demographics, such as type of travel, class, and customer type. Currently, I think a stacked bar chart would be the best option currently. This is because they can be used to compare the relative sizes of categories (like satisfied versus unsatisfied) directly and see that proportion of satisfaction across different customer segments. 
+
+These graphs would be well-labeled and presented in a manner that is inclusion of everyone. 
+
+## Misc 
+
+I have created a Github link for this project. I will update my ReadMe files as I add more R scripts and folders into the project. 
 
