@@ -9,7 +9,6 @@ airline <- read.csv("data/Airline_customer_satisfaction.csv") |>
   janitor::clean_names()
 
 
-
 ####### FOR PLOT 1 (but multiple graphs) #######
 
 # Select relevant columns for service satisfaction ratings
@@ -91,6 +90,10 @@ ridge_plot <- ggplot(service_ratings_long, aes(x = Rating, y = Service, fill = S
 ridge_plot
 
 ## i like these ones enough 
+
+first_half <- service_ratings_long %>% filter(Service %in% service_labels[1:7])
+second_half <- service_ratings_long %>% filter(Service %in% service_labels[8:14])
+
 
 facet_density_plot1 <- ggplot(first_half, aes(x = Rating, fill = Service)) +
   geom_density(alpha = 0.7) +
