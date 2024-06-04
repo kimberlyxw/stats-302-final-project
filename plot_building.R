@@ -29,8 +29,7 @@ service_ratings <- airline |> select(
   online_boarding
 )
 
-# Convert data to long format for ggplot2
-service_ratings_long <- service_ratings %>%
+service_ratings_long <- service_ratings |> 
   pivot_longer(cols = everything(), names_to = "Service", values_to = "Rating")
 
 service_labels <- c(
@@ -91,9 +90,48 @@ ridge_plot
 
 ## i like these ones enough 
 
-first_half <- service_ratings_long %>% filter(Service %in% service_labels[1:7])
-second_half <- service_ratings_long %>% filter(Service %in% service_labels[8:14])
+service_ratings <- airline |> select(
+  seat_comfort,
+  departure_arrival_time_convenient,
+  food_and_drink,
+  gate_location,
+  inflight_wifi_service,
+  inflight_entertainment,
+  online_support,
+  ease_of_online_booking,
+  on_board_service,
+  leg_room_service,
+  baggage_handling,
+  checkin_service,
+  cleanliness,
+  online_boarding
+)
 
+service_ratings_long <- service_ratings |> 
+  pivot_longer(cols = everything(), names_to = "Service", values_to = "Rating")
+
+service_labels <- c(
+  seat_comfort = "Seat Comfort",
+  departure_arrival_time_convenient = "Departure/Arrival Time Convenient",
+  food_and_drink = "Food and Drink",
+  gate_location = "Gate Location",
+  inflight_wifi_service = "Inflight WiFi Service",
+  inflight_entertainment = "Inflight Entertainment",
+  online_support = "Online Support",
+  ease_of_online_booking = "Ease of Online Booking",
+  on_board_service = "On-Board Service",
+  leg_room_service = "Leg Room Service",
+  baggage_handling = "Baggage Handling",
+  checkin_service = "Checkin Service",
+  cleanliness = "Cleanliness",
+  online_boarding = "Online Boarding"
+)
+
+
+first_half <- service_ratings_long |> 
+  filter(Service %in% service_labels[1:7])
+second_half <- service_ratings_long |> 
+  filter(Service %in% service_labels[8:14])
 
 facet_density_plot1 <- ggplot(first_half, aes(x = Rating, fill = Service)) +
   geom_density(alpha = 0.7) +
