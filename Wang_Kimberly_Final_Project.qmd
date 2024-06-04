@@ -45,7 +45,10 @@ This dataset primarily focuses on customer satisfaction levels, unlike other dat
 
 :::
 
-##  
+##  Service Satisifaction Ratings 
+
+The next graphs look at the distribution of satisfaction rating scores across various services. 
+
 
 
 

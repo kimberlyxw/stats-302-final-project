@@ -3,6 +3,7 @@ library(ggplot2)
 library(ggridges)
 library(dplyr)
 library(tidyr)
+library(patchwork)
 
 # Read the dataset
 airline <- read.csv("data/Airline_customer_satisfaction.csv") |> 
@@ -111,27 +112,27 @@ service_ratings_long <- service_ratings |>
   pivot_longer(cols = everything(), names_to = "Service", values_to = "Rating")
 
 service_labels <- c(
-  seat_comfort = "Seat Comfort",
-  departure_arrival_time_convenient = "Departure/Arrival Time Convenient",
-  food_and_drink = "Food and Drink",
-  gate_location = "Gate Location",
-  inflight_wifi_service = "Inflight WiFi Service",
-  inflight_entertainment = "Inflight Entertainment",
-  online_support = "Online Support",
-  ease_of_online_booking = "Ease of Online Booking",
-  on_board_service = "On-Board Service",
-  leg_room_service = "Leg Room Service",
-  baggage_handling = "Baggage Handling",
-  checkin_service = "Checkin Service",
-  cleanliness = "Cleanliness",
-  online_boarding = "Online Boarding"
+  "seat_comfort" = "Seat Comfort",
+  "departure_arrival_time_convenient" = "Departure/Arrival Time Convenient",
+  "food_and_drink" = "Food and Drink",
+  "gate_location" = "Gate Location",
+  "inflight_wifi_service" = "Inflight WiFi Service",
+  "inflight_entertainment" = "Inflight Entertainment",
+  "online_support" = "Online Support",
+  "ease_of_online_booking" = "Ease of Online Booking",
+  "on_board_service" = "On-Board Service",
+  "leg_room_service" = "Leg Room Service",
+  "baggage_handling" = "Baggage Handling",
+  "checkin_service" = "Checkin Service",
+  "cleanliness" = "Cleanliness",
+  "online_boarding" = "Online Boarding"
 )
 
 
 first_half <- service_ratings_long |> 
-  filter(Service %in% service_labels[1:7])
+  filter(Service %in% names(service_labels)[1:7])
 second_half <- service_ratings_long |> 
-  filter(Service %in% service_labels[8:14])
+  filter(Service %in% names(service_labels)[8:14])
 
 facet_density_plot1 <- ggplot(first_half, aes(x = Rating, fill = Service)) +
   geom_density(alpha = 0.7) +
@@ -192,8 +193,6 @@ facet_density_plot2 <- ggplot(second_half, aes(x = Rating, fill = Service)) +
 
 facet_density_plot1
 facet_density_plot2
-
-
 
 ####### FOR PLOT 2 #######
 
@@ -298,6 +297,7 @@ type_of_travel_plot <- ggplot(satisfaction_data, aes(x = type_of_travel, fill = 
     y = "Proportion",
     fill = "Satisfaction"
   ) +
+  scale_fill_discrete(labels = c("Dissatisfied", "Satisfied")) +
   theme(
     plot.title = element_text(hjust = 0.5),
     axis.text = element_text(size = 10),
@@ -316,6 +316,8 @@ class_plot <- ggplot(satisfaction_data, aes(x = class, fill = satisfaction)) +
     y = "Proportion",
     fill = "Satisfaction"
   ) +
+  scale_fill_discrete(labels = c("Dissatisfied", "Satisfied"), 
+                      values = c("Dissastisfied" = "red", "Satisfied" = "blue")) +
   theme(
     plot.title = element_text(hjust = 0.5),
     axis.text = element_text(size = 10),
@@ -334,6 +336,7 @@ customer_type_plot <- ggplot(satisfaction_data, aes(x = customer_type, fill = sa
     y = "Proportion",
     fill = "Satisfaction"
   ) +
+  scale_fill_discrete(labels = c("Dissatisfied", "Satisfied")) +
   theme(
     plot.title = element_text(hjust = 0.5),
     axis.text = element_text(size = 10),
@@ -342,10 +345,13 @@ customer_type_plot <- ggplot(satisfaction_data, aes(x = customer_type, fill = sa
     legend.text = element_text(size = 8)
   )
 
-# Display plots
-print(type_of_travel_plot)
-print(class_plot)
 print(customer_type_plot)
+
+
+# Display plots
+type_of_travel_plot
+class_plot
+customer_type_plot
 
 satisfaction_count <- airline |>
   count(satisfaction)
