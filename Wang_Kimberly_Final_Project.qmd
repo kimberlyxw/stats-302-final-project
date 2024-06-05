@@ -133,7 +133,7 @@ ridge_plot <- ggplot(service_ratings_long, aes(x = Rating, y = Service, fill = S
 ridge_plot 
 ```
 
-### Density Plots {.scrollable}
+### Density Plots (Part 1) {.scrollable}
 
 ```{r}
 #| echo: FALSE 
@@ -247,6 +247,7 @@ facet_density_plot1
 
 ```
 
+### Density Plots (Part 2) {.scrollable}
 ```{r}
 #| echo: FALSE 
 #| fig.width: 16
@@ -474,7 +475,7 @@ satisfaction_plot <- (type_of_travel_plot + class_plot) / (customer_type_plot + 
   plot_layout(guides = "collect") + 
   plot_annotation(title = "Analysis of Customer Satisfaction Across Different Dimensions", 
  theme = theme(
-      plot.title = element_text(hjust = 0.5, size = 40)
+      plot.title = element_text(hjust = 0.5, size = 50)
     ))
 
 satisfaction_plot <- satisfaction_plot & theme(
@@ -618,5 +619,20 @@ piecharts <- piecharts & theme(
 piecharts
 
 ```
+
+:::
+
+
+## Additional Information {.scrollable}
+
+Provided within each panel is additional information about each series of graphics that were just presented. 
+
+::: {.panel-tabset}
+
+### Service Satisifaction Ratings {.scrollable}
+
+The density plots and ridge plots show the distribution of ratings for each service feature. These visualizations provide a comprehensive overview of customer satisfaction ratings across various service features within the context of airline services. Across different service features, a satisfaction rating of 4 is consistently the most frequent rating. This indicates a general trend where most customers are quite satisfied with the services, although not to the highest possible degree (5).
+
+By comparing the density peaks, one can identify which service features are generally rated higher and which ones have more room for improvement. Features like "Inflight Entertainment" and "Seat Comfort" often show higher peaks at higher ratings, indicating better performance. Services like "Baggage Handling" and "Checkin Service" might show more significant peaks at lower ratings, indicating areas where the service might not be meeting customer expectations.
 
 :::
