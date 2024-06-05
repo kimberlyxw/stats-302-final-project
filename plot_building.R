@@ -74,20 +74,26 @@ density_plot
 ridge_plot <- ggplot(service_ratings_long, aes(x = Rating, y = Service, fill = Service)) +
   geom_density_ridges(alpha = 0.5) +
   scale_y_discrete(labels = service_labels) +
-  theme_minimal() +
+  scale_x_continuous(breaks = c(0, 1, 2, 3, 4, 5)) + 
   labs(
-    title = "Ridge Plot of Service Satisfaction Ratings",
-    subtitle = "Distribution of Ratings for Different Service Features",
+    title = "Ridge Plot of Different Service Features Satisfaction Ratings",
+    subtitle = "While it differs from service to service, the most common rating is a 4",
     x = "Rating",
     y = "Service"
   ) +
   theme(
-    plot.title = element_text(hjust = 0.5),
-    plot.subtitle = element_text(hjust = 0.5),
-    legend.position = "none"
+    plot.title = element_text(hjust = 0.5, size = 20),  
+    plot.subtitle = element_text(hjust = 0.5, size = 16),     
+    axis.title.x = element_text(size = 15.5),                   
+    axis.title.y = element_text(size = 15.5),                    
+    axis.text.x = element_text(size = 13),                     
+    axis.text.y = element_text(size = 13),                     
+    legend.position = "none",
+    strip.text = element_text(size = 15) 
   )
 
-ridge_plot
+ridge_plot 
+ggsave("ridge_plot.png", plot = ridge_plot, height = 12, width = 15)
 
 ## i like these ones enough 
 
@@ -136,7 +142,6 @@ second_half <- service_ratings_long |>
 
 facet_density_plot1 <- ggplot(first_half, aes(x = Rating, fill = Service)) +
   geom_density(alpha = 0.7) +
-  theme_minimal() +
   labs(
     title = "Density Plots of Service Satisfaction Ratings (Part 1)",
     subtitle = "Distribution of Ratings for Different Service Features",
@@ -147,26 +152,29 @@ facet_density_plot1 <- ggplot(first_half, aes(x = Rating, fill = Service)) +
   scale_y_continuous(limits = c(0, 1)) +  # Set y-axis limit to 1
   scale_fill_manual(values = scales::hue_pal()(length(service_labels)), labels = service_labels) +  # Change legend names and colors
   theme(
-    plot.title = element_text(hjust = 0.5),
-    plot.subtitle = element_text(hjust = 0.5),
-    strip.text = element_text(size = 10),
-    axis.text = element_text(size = 8),
-    axis.title = element_text(size = 10),
-    legend.title = element_text(size = 10),
-    legend.text = element_text(size = 8),
+    plot.title = element_text(hjust = 0.5, size = 22),
+    plot.subtitle = element_text(hjust = 0.5, size = 17),
+    strip.text = element_text(size = 15),
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 15),
+    legend.title = element_text(size = 15),
+    legend.text = element_text(size = 12),
     legend.position = "bottom",
-    panel.grid.major = element_line(color = "grey90"),  # Lighten the major grid lines
-    panel.grid.minor = element_line(color = "grey90"),  # Lighten the minor grid lines
-    panel.grid.major.x = element_blank(),  # Remove major vertical grid lines
-    panel.grid.minor.x = element_blank(),  # Remove minor vertical grid lines
+    panel.grid.major = element_line(color = "grey90"),  # lighten the major grid lines
+    panel.grid.minor = element_line(color = "grey90"),  
+    panel.grid.major.x = element_blank(),  # remove major vertical grid lines
+    panel.grid.minor.x = element_blank(),  
     panel.spacing = unit(1, "lines")
   ) +
   facet_wrap(~ Service, scales = "fixed", nrow = 4, labeller = labeller(Service = service_labels))
 
 # Faceted density plots for the second half
+
+num_services <- length(service_labels)
+rainbow_colors <- rev(rainbow(num_services))
+
 facet_density_plot2 <- ggplot(second_half, aes(x = Rating, fill = Service)) +
   geom_density(alpha = 0.7) +
-  theme_minimal() +
   labs(
     title = "Density Plots of Service Satisfaction Ratings (Part 2)",
     subtitle = "Distribution of Ratings for Different Service Features",
@@ -175,15 +183,15 @@ facet_density_plot2 <- ggplot(second_half, aes(x = Rating, fill = Service)) +
     fill = "Service"
   ) +
   scale_y_continuous(limits = c(0, 1)) +  # Set y-axis limit to 1
-  scale_fill_manual(values = scales::hue_pal()(length(service_labels)), labels = service_labels) +  # Change legend names and colors
+  scale_fill_manual(values = rainbow_colors, labels = service_labels) +  # Change legend names and colors
   theme(
-    plot.title = element_text(hjust = 0.5),
-    plot.subtitle = element_text(hjust = 0.5),
-    strip.text = element_text(size = 10),
-    axis.text = element_text(size = 8),
-    axis.title = element_text(size = 10),
-    legend.title = element_text(size = 10),
-    legend.text = element_text(size = 8),
+    plot.title = element_text(hjust = 0.5, size = 22),
+    plot.subtitle = element_text(hjust = 0.5, size = 17),
+    strip.text = element_text(size = 15),
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 15),
+    legend.title = element_text(size = 15),
+    legend.text = element_text(size = 12),
     legend.position = "bottom",
     panel.grid.major.x = element_blank(),  # Remove major vertical grid lines ???
     panel.grid.minor.x = element_blank(),  # Remove minor vertical grid lines ??
@@ -194,6 +202,8 @@ facet_density_plot2 <- ggplot(second_half, aes(x = Rating, fill = Service)) +
 facet_density_plot1
 facet_density_plot2
 
+ggsave("facet_density_plot1.png", plot = facet_density_plot1, width = 15, height = 12)
+ggsave("facet_density_plot2.png", plot = facet_density_plot2, width = 15, height = 12)
 ####### FOR PLOT 2 #######
 
 # Select relevant columns including travel class and service ratings
@@ -226,7 +236,6 @@ custom_colors <- c("Business" = "lightblue", "Eco" = "lightgreen", "Eco Plus" = 
 
 boxplot_plot <- ggplot(service_ratings_plot2_long, aes(x = class, y = Rating, fill = class)) +
   geom_boxplot() +
-  theme_minimal() +
   labs(
     title = "Boxplots of Service Ratings by Travel Class",
     subtitle = "Comparing Ratings for Different Service Features",
@@ -235,13 +244,13 @@ boxplot_plot <- ggplot(service_ratings_plot2_long, aes(x = class, y = Rating, fi
     fill = "Travel Class"
   ) +
   theme(
-    plot.title = element_text(hjust = 0.5),
-    plot.subtitle = element_text(hjust = 0.5),
-    strip.text = element_text(size = 10),
-    axis.text = element_text(size = 8),
-    axis.title = element_text(size = 10),
-    legend.title = element_text(size = 10),
-    legend.text = element_text(size = 8),
+    plot.title = element_text(hjust = 0.5, size = 22),
+    plot.subtitle = element_text(hjust = 0.5, size = 17),
+    strip.text = element_text(size = 15),
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 15),
+    legend.title = element_text(size = 15),
+    legend.text = element_text(size = 12),
     legend.position = "bottom"
   ) +
   facet_wrap(~ Service, scales = "free_y") + 
@@ -250,7 +259,6 @@ boxplot_plot <- ggplot(service_ratings_plot2_long, aes(x = class, y = Rating, fi
 # Create violin plots for each service category by travel class
 violin_plot <- ggplot(service_ratings_plot2_long, aes(x = class, y = Rating, fill = class)) +
   geom_violin() +
-  theme_minimal() +
   labs(
     title = "Violin Plots of Service Ratings by Travel Class",
     subtitle = "Comparing Ratings for Different Service Features",
@@ -259,13 +267,13 @@ violin_plot <- ggplot(service_ratings_plot2_long, aes(x = class, y = Rating, fil
     fill = "Travel Class"
   ) +
   theme(
-    plot.title = element_text(hjust = 0.5),
-    plot.subtitle = element_text(hjust = 0.5),
-    strip.text = element_text(size = 10),
-    axis.text = element_text(size = 8),
-    axis.title = element_text(size = 10),
-    legend.title = element_text(size = 10),
-    legend.text = element_text(size = 8),
+    plot.title = element_text(hjust = 0.5, size = 22),
+    plot.subtitle = element_text(hjust = 0.5, size= 17),
+    strip.text = element_text(size = 15),
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 15),
+    legend.title = element_text(size = 12),
+    legend.text = element_text(size = 15),
     legend.position = "bottom"
   ) +
   facet_wrap(~ Service, scales = "free_y") + 
@@ -274,6 +282,9 @@ violin_plot <- ggplot(service_ratings_plot2_long, aes(x = class, y = Rating, fil
 
 boxplot_plot
 violin_plot
+
+ggsave("boxplot_plot.png", plot = boxplot_plot, width = 15, height = 12)
+ggsave("violin_plot.png", plot = violin_plot, width = 15, height = 12)
 
 ##### PLOT NUMBER 3 #######
 
@@ -288,6 +299,10 @@ satisfaction_data <- airline |> select(
 # Create a stacked bar chart for each demographic variable
 
 # Type of Travel
+
+satisfaction_data <- satisfaction_data |>
+  mutate(type_of_travel = ifelse(type_of_travel == "Business travel", "Business Travel", type_of_travel))
+
 type_of_travel_plot <- ggplot(satisfaction_data, aes(x = type_of_travel, fill = satisfaction)) +
   geom_bar(position = "fill") +
   theme_minimal() +
@@ -297,13 +312,12 @@ type_of_travel_plot <- ggplot(satisfaction_data, aes(x = type_of_travel, fill = 
     y = "Proportion",
     fill = "Satisfaction"
   ) +
-  scale_fill_discrete(labels = c("Dissatisfied", "Satisfied")) +
+  scale_fill_discrete(labels = c("Unsatisfied", "Satisfied")) +
   theme(
     plot.title = element_text(hjust = 0.5),
     axis.text = element_text(size = 10),
     axis.title = element_text(size = 12),
-    legend.title = element_text(size = 10),
-    legend.text = element_text(size = 8)
+    legend.position = "none"
   )
 
 # Class
@@ -316,17 +330,19 @@ class_plot <- ggplot(satisfaction_data, aes(x = class, fill = satisfaction)) +
     y = "Proportion",
     fill = "Satisfaction"
   ) +
-  scale_fill_discrete(labels = c("Dissatisfied", "Satisfied"), 
-                      values = c("Dissastisfied" = "red", "Satisfied" = "blue")) +
+  scale_fill_discrete(labels = c("Unsatisfied", "Satisfied")
+                     ) +
   theme(
     plot.title = element_text(hjust = 0.5),
     axis.text = element_text(size = 10),
     axis.title = element_text(size = 12),
-    legend.title = element_text(size = 10),
-    legend.text = element_text(size = 8)
+    legend.position = "none"
   )
 
 # Customer Type
+satisfaction_data <- satisfaction_data |>
+  mutate(customer_type = ifelse(customer_type == "disloyal Customer", "Disloyal Customer", customer_type))
+
 customer_type_plot <- ggplot(satisfaction_data, aes(x = customer_type, fill = satisfaction)) +
   geom_bar(position = "fill") +
   theme_minimal() +
@@ -336,16 +352,15 @@ customer_type_plot <- ggplot(satisfaction_data, aes(x = customer_type, fill = sa
     y = "Proportion",
     fill = "Satisfaction"
   ) +
-  scale_fill_discrete(labels = c("Dissatisfied", "Satisfied")) +
+  scale_fill_discrete(labels = c("Unsatisfied", "Satisfied")) +
   theme(
     plot.title = element_text(hjust = 0.5),
     axis.text = element_text(size = 10),
     axis.title = element_text(size = 12),
-    legend.title = element_text(size = 10),
-    legend.text = element_text(size = 8)
+    legend.position = "none"
   )
 
-print(customer_type_plot)
+customer_type_plot
 
 
 # Display plots
@@ -357,10 +372,11 @@ satisfaction_count <- airline |>
   count(satisfaction)
 
 # Create a bar plot for the total number of satisfied and unsatisfied customers
-satisfaction_plot <- ggplot(satisfaction_count, aes(x = satisfaction, y = n, fill = satisfaction)) +
+satisfaction_count_plot <- ggplot(satisfaction_count, aes(x = satisfaction, y = n, fill = satisfaction)) +
   geom_bar(stat = "identity", width = 0.7) +
   geom_text(aes(label = n), vjust = 1.5, color = "white", size = 5) +
-  scale_fill_manual(values = c("satisfied" = "#1b9e77", "neutral or dissatisfied" = "#d95f02")) +
+  scale_fill_manual(values = c("dissatisfied" = "#d95f02", "satisfied" = "#1b9e77"), 
+                    labels = c("Unsatisfied", "Satisfied")) +
   theme_minimal() +
   labs(
     title = "Total Number of Satisfied vs. Unsatisfied Customers",
@@ -375,85 +391,107 @@ satisfaction_plot <- ggplot(satisfaction_count, aes(x = satisfaction, y = n, fil
     legend.position = "none"
   )
 
-satisfaction_plot
+satisfaction_count_plot
 
+# satisfaction grouped plot 
+
+satisfaction_plot <- (type_of_travel_plot + class_plot) / (customer_type_plot + satisfaction_count_plot) + 
+  plot_layout(guides = "collect") + 
+  plot_annotation(title = "Analysis of Customer Satisfaction Across Different Dimensions")
+satisfaction_plot <- satisfaction_plot & theme(
+  legend.position = "bottom",
+  legend.title = element_text(size = 10),
+  legend.text = element_text(size = 8),
+  plot.title = element_text(hjust = 0.5, size = 16)
+)
+
+satisfaction_plot
+ggsave("satisfaction_plot.png", plot = satisfaction_plot,  width = 15, height = 10)
 
 ## same information as plot series 3 but in pie chart form 
 
 # Type of Travel
-# Aggregate the data
-type_of_travel_agg <- satisfaction_data %>%
-  count(type_of_travel, satisfaction) %>%
-  group_by(type_of_travel) %>%
+satisfaction_data <- satisfaction_data |>
+  mutate(type_of_travel = ifelse(type_of_travel == "Business travel", "Business Travel", type_of_travel))
+
+
+type_of_travel_count <- satisfaction_data |>
+  count(type_of_travel, satisfaction) |>
+  group_by(type_of_travel) |>
   mutate(prop = n / sum(n), 
          label = scales::percent(prop, accuracy = 0.1))
 
 # Create pie chart
-type_of_travel_pie <- ggplot(type_of_travel_agg, aes(x = "", y = prop, fill = satisfaction)) +
+type_of_travel_pie <- ggplot(type_of_travel_count, aes(x = "", y = prop, fill = satisfaction)) +
   geom_bar(stat = "identity", width = 1) +
   coord_polar(theta = "y") +
   facet_wrap(~ type_of_travel) +
-  geom_text(aes(label = label), position = position_stack(vjust = 0.5), color = "white", size = 4) +
+  geom_text(aes(label = label), position = position_stack(vjust = 0.5), color = "white", size = 3) +
   theme_minimal() +
   labs(
-    title = "Customer Satisfaction by Type of Travel",
+    title = "By Type of Travel",
     x = NULL,
     y = NULL,
     fill = "Satisfaction"
   ) +
+  scale_fill_discrete(labels = c("Unsatisfied", "Satisfied")) +
   theme(
-    plot.title = element_text(hjust = 0.5, size = 16),
+    plot.title = element_text(hjust = 0.5, size = 8),
     axis.text = element_blank(),
     axis.title = element_blank(),
     panel.grid = element_blank(),
     legend.title = element_text(size = 10),
-    legend.text = element_text(size = 8)
+    legend.text = element_text(size = 8), 
+    strip.text = element_text(size = 6.5)
   )
 
-# Display the plot
-print(type_of_travel_pie)
+type_of_travel_pie
 
 
 # class
-# Aggregate the data
-class_agg <- satisfaction_data %>%
-  count(class, satisfaction) %>%
-  group_by(class) %>%
+class_count <- satisfaction_data |>
+  count(class, satisfaction) |>
+  group_by(class) |>
   mutate(prop = n / sum(n), 
          label = scales::percent(prop, accuracy = 0.1))
 
 # Create pie chart
-class_pie <- ggplot(class_agg, aes(x = "", y = prop, fill = satisfaction)) +
+class_pie <- ggplot(class_count, aes(x = "", y = prop, fill = satisfaction)) +
   geom_bar(stat = "identity", width = 1) +
   coord_polar(theta = "y") +
   facet_wrap(~ class) +
-  geom_text(aes(label = label), position = position_stack(vjust = 0.5), color = "white", size = 4) +
+  geom_text(aes(label = label), position = position_stack(vjust = 0.5), color = "white", size = 3) +
   theme_minimal() +
   labs(
-    title = "Customer Satisfaction by Class",
+    title = "By Class",
     x = NULL,
     y = NULL,
     fill = "Satisfaction"
   ) +
+  scale_fill_discrete(labels = c("Unsatisfied", "Satisfied")) +
   theme(
-    plot.title = element_text(hjust = 0.5, size = 16),
+    plot.title = element_text(hjust = 0.5, size = 8),
     axis.text = element_blank(),
     axis.title = element_blank(),
     panel.grid = element_blank(),
     legend.title = element_text(size = 10),
-    legend.text = element_text(size = 8)
+    legend.text = element_text(size = 8), 
+    strip.text = element_text(size = 6.5)
   )
 
-# Display the plot
-print(class_pie)
+class_pie
 
 
 # Customer Type
 # Aggregate the data
 
-customer_type_agg <- satisfaction_data %>%
-  count(customer_type, satisfaction) %>%
-  group_by(customer_type) %>%
+satisfaction_data <- satisfaction_data |>
+  mutate(customer_type = ifelse(customer_type == "disloyal Customer", "Disloyal Customer", customer_type))
+
+
+customer_type_agg <- satisfaction_data |>
+  count(customer_type, satisfaction) |>
+  group_by(customer_type) |>
   mutate(prop = n / sum(n), 
          label = scales::percent(prop, accuracy = 0.1))
 
@@ -461,23 +499,42 @@ customer_type_agg <- satisfaction_data %>%
 customer_type_pie <- ggplot(customer_type_agg, aes(x = "", y = prop, fill = satisfaction)) +
   geom_bar(stat = "identity", width = 1) +
   coord_polar(theta = "y") +
-  facet_wrap(~ customer_type) +
-  geom_text(aes(label = label), position = position_stack(vjust = 0.5), color = "white", size = 4) +
+  facet_wrap(~ customer_type, nrow = 1) +
+  geom_text(aes(label = label), position = position_stack(vjust = 0.5), color = "white", size = 3) +
   theme_minimal() +
   labs(
-    title = "Customer Satisfaction by Customer Type",
+    title = "By Customer Type",
     x = NULL,
     y = NULL,
-    fill = "Satisfaction"
-  ) +
+    fill = "Satisfaction") +
+  scale_fill_discrete(labels = c("Unsatisfied", "Satisfied")) +
   theme(
-    plot.title = element_text(hjust = 0.5, size = 16),
+    plot.title = element_text(hjust = 0.5, size = 8),
     axis.text = element_blank(),
     axis.title = element_blank(),
     panel.grid = element_blank(),
     legend.title = element_text(size = 10),
-    legend.text = element_text(size = 8)
+    legend.text = element_text(size = 8), 
+    strip.text = element_text(size = 6.5)
   )
 
 # Display the plot
-print(customer_type_pie)
+customer_type_pie
+
+piecharts <- (class_pie / (type_of_travel_pie  + customer_type_pie)) + 
+  plot_layout(guides = "collect") + 
+  plot_annotation(title = "Customer Satisfaction Analysis Across Various Dimensions with Percentage Values")
+
+# Adjust the theme for the combined legend and title
+piecharts <- piecharts & theme(
+  legend.position = "bottom",
+  legend.title = element_text(size = 10),
+  legend.text = element_text(size = 8),
+  plot.title = element_text(hjust = 0.5, size = 15), 
+  strip.text = element_text(size = 9.5), 
+  plot.margin = margin(t = 15, r = 5, b = 5, l = 5)
+)
+piecharts
+
+
+ggsave("piechats_plot.png", plot = piecharts,  width = 12, height = 8)

@@ -50,7 +50,6 @@ I also liked this dataset because there are both numeric and character variables
 
 ## Visualization plan
 
-
 First, I want to have a graph (or perhaps multiple) that will either be a density overlap plot or a ridge plot of the service satisfaction ratings. The goal would be to display the distribution of service ratings for each service feature like seat comfort, cleanliness, food and drink, etc. Each service will be represented in a different color for clarity. If the graph becomes too crowded, I will split the data into multiple graphs to maintain readability.
 
 Next, I would like a graph that shows the differences in overall ratings by travel class. I would compare the average or distribution of ratings across the different travel classes like economy and business. I believe that boxplots or violin plots would be the best option to show these relationships, because they would show the differences between the medians and quartiles of the various travel classes. The challenge lies in managing the multitude of variables; I may need to select only the most pertinent categories or divide the data into a series of plots. This section would definitely not be just one box plot, but most likely a collection of them and specifically for a series of categories that are most related to differences in travel classes (like seat comfort). 
