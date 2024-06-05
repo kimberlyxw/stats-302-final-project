@@ -1,0 +1,23 @@
+Variable,Meaning
+Satisfication,  the satisfaction level of the customer
+Customer Type, type of customer: 'Loyal Customer' or 'Disloyal Customer'
+Age, age of customer
+Type of Travel, purpose of the travel: 'Business travel' or 'Personal Travel’
+Class, class of travel: 'Business', 'Eco', or 'Eco Plus’.
+Flight Distance,	the distance of the flight in kilometres
+Seat comfort,	rating of seat comfort provided during the flight (1 to 5)
+Departure/Arrival time convenient,	rating of the convenience of departure/arrival time (1 to 5)
+Food and drink,	rating of food and drink quality provided during the flight (1 to 5)
+Gate location,	rating of gate location convenience (1 to 5)
+Inflight wifi service, rating of inflight wifi service satisfaction (1 to 5)
+Inflight entertainment, rating of inflight entertainment satisfaction (1 to 5)
+Online support, rating of online customer support satisfaction (1 to 5)
+Ease of Online booking, rating of ease of online booking satisfaction (1 to 5)
+On-board service, rating of on-board service satisfaction (1 to 5)
+Leg room service, rating of leg room service satisfaction (1 to 5)
+Baggage handling, rating of baggage handling satisfaction (1 to 5)
+Checkin service, rating of check-in service satisfaction (1 to 5)
+Cleanliness, rating of cleanliness satisfaction (1 to 5)
+Online boarding, rating of online boarding satisfaction (1 to 5)
+Departure Delay in Minutes, departure delay in minutes
+Arrival Delay in Minutes, arrival delay in minutes

@@ -1,10 +1,11 @@
 ---
-title: "ENTER TITLE !!!!"
+title: "Elevating Experiences: Airline Satisfaction Visualized"
 subtitle: "STAT 302 Final Project"
 author: "Kimberly Wang"
 format: 
   revealjs:
     transition: slide
+    theme: sky
     embed-resources: true
     slide-number: true
     show-slide-number: all
@@ -18,16 +19,12 @@ editor: visual
 
 ## Introduction {.scrollable}
 
+Understanding customer satisfaction is crucial for any service-oriented business, especially in the competitive airline industry. This project explores the dynamics of customer satisfaction using a rich dataset from an unnamed airline, provided on Kaggle.^[Ramin Huseyn (2024). Airline Customer Satisfaction. Location: Kaggle [https://www.kaggle.com/datasets/raminhuseyn/airline-customer-satisfaction](https://www.kaggle.com/datasets/raminhuseyn/airline-customer-satisfaction)] The dataset contains detailed information on various aspects of airline service, including customer ratings on 14 different service features. By analyzing this data through various visualization techniques such as ridge plots, density plots, violin plots, and pie charts, the aim is to identify patterns and trends in customer satisfaction. This analysis will help highlight areas of strength and pinpoint opportunities for improvement, ultimately contributing to better service quality and customer experience.
 
-
-My GitHub Repo can be accessed through this link: [https://github.com/kimberlyxw/stats-302-final-project.git](https://github.com/kimberlyxw/stats-302-final-project.git). 
+My GitHub Repo can be accessed through here: [Github Repo Link](https://github.com/kimberlyxw/stats-302-final-project.git). 
 
 
 ## Data {.scrollable}
-
-::: {.panel-tabset}
-
-### Data Information
 
 This dataset was collected from an unnamed airline company, and it focuses on customer satisfaction levels. This dataset can be analyzed and used to determine how various aspects of a customer and their trip can affect their overall satisfaction levels with the airline. 
 
@@ -39,15 +36,12 @@ This dataset was found on Kaggle.^[Ramin Huseyn (2024). Airline Customer Satisfa
 
 The dataset was provided by Ramin Huseyn, and it was last updated on May 6th, 2024. 
 
-### Why this Dataset? 
+This dataset primarily focuses on customer satisfaction levels, offering a unique opportunity for visualization and analysis of passengers' needs and experiences. Unlike datasets that concentrate on operational metrics, this dataset allows for a more people-centric analysis, which I find particularly compelling and potentially insightful.
 
-This dataset primarily focuses on customer satisfaction levels, unlike other datasets that may concentrate on operational metrics for an airline While, it is important to ensure that the airplanes are running properly and well by looking at that type of data, this type of dataset allows for more people-centric analysis, which is more interesting to me.  
-
-:::
 
 ##  Service Satisifaction Ratings {.scrollable}
 
-These first  graphs look at the distribution of satisfaction rating scores across various services. 
+These first graphs look at the distribution of satisfaction rating scores across various services. 
 
 ::: {.panel-tabset}
 
@@ -202,7 +196,7 @@ facet_density_plot1 <- ggplot(first_half, aes(x = Rating, fill = Service)) +
     axis.title = element_text(size = 20),
     legend.title = element_text(size = 20),
     legend.text = element_text(size = 17),
-    legend.position = "bottom",
+     legend.position = c(0.81, 0.12),
     panel.grid.major = element_line(color = "grey90"),  # lighten the major grid lines
     panel.grid.minor = element_line(color = "grey90"),  
     panel.grid.major.x = element_blank(),  # remove major vertical grid lines
@@ -235,7 +229,7 @@ facet_density_plot2 <- ggplot(second_half, aes(x = Rating, fill = Service)) +
     axis.title = element_text(size = 20),
     legend.title = element_text(size = 20),
     legend.text = element_text(size = 17),
-    legend.position = "bottom",
+   legend.position = c(0.79, 0.12),
     panel.grid.major.x = element_blank(),  # Remove major vertical grid lines ???
     panel.grid.minor.x = element_blank(),  # Remove minor vertical grid lines ??
     panel.spacing = unit(1, "lines")
@@ -252,7 +246,10 @@ facet_density_plot1
 #| echo: FALSE 
 #| fig.width: 16
 #| fig.height: 13
+
+
 facet_density_plot2
+
 ```
 
 :::
@@ -622,17 +619,53 @@ piecharts
 
 :::
 
-
 ## Additional Information {.scrollable}
 
-Provided within each panel is additional information about each series of graphics that were just presented. 
+Provided within each column is additional information about each series of graphics that were just presented. 
 
 ::: {.panel-tabset}
-
 ### Service Satisifaction Ratings {.scrollable}
 
 The density plots and ridge plots show the distribution of ratings for each service feature. These visualizations provide a comprehensive overview of customer satisfaction ratings across various service features within the context of airline services. Across different service features, a satisfaction rating of 4 is consistently the most frequent rating. This indicates a general trend where most customers are quite satisfied with the services, although not to the highest possible degree (5).
 
-By comparing the density peaks, one can identify which service features are generally rated higher and which ones have more room for improvement. Features like "Inflight Entertainment" and "Seat Comfort" often show higher peaks at higher ratings, indicating better performance. Services like "Baggage Handling" and "Checkin Service" might show more significant peaks at lower ratings, indicating areas where the service might not be meeting customer expectations.
+The ridge plot really emphasizes that while there is a common peak at rating 4 across many service features, indicating general satisfaction, there is variability across features. For example, Seat Comfort and Online Support show high satisfaction, while Baggage Handling has more spread-out ratings, suggesting mixed feedback.
+
+The density plots provide a similar detailed view of the distribution of ratings for each service feature. The plots show the density of ratings from 0 to 5 for each service, indicating how frequently each rating was given.
+Services like Seat Comfort, Inflight Entertainment, and Online Support have higher densities around ratings 4 and 5, indicating higher satisfaction levels for these services. Features such as Baggage Handling and Cleanliness, particularly in the second part of the density plots, show significant densities at lower ratings, suggesting areas where customer satisfaction is lower.
+
+Services such as Seat Comfort, Inflight Entertainment, and Online Support consistently show higher satisfaction ratings. These are areas where the airline performs well and meets customer expectations. Certain services like Inflight WiFi Service and Leg Room Service exhibit mixed customer satisfaction. The variability in ratings indicates that while some customers are very satisfied, others are not, suggesting inconsistencies in service quality. From this analysis it appears that certain service features consistently receive higher ratings, indicating strengths, while others may need targeted improvements. These graphs provide a broader overview of the satisfaction ratings across various services. 
+
+### Ratings Based on Travel Class {.scrollable}
+
+The violin and box plots provide a detailed comparison of customer satisfaction ratings across different service features segmented by travel class.
+
+These plots collectively illustrate the distribution and central tendencies of customer satisfaction ratings across different travel classes (Business, Eco, and Eco Plus) for various service features (Seat Comfort, Cleanliness, Inflight Entertainment, and On Board Service). These services were specifically selected because often they are the ones most directly associated with differences in travel classes. Those that pay more for business seats most likely have higher expectations of what the seat comfort and cleanliness of their experience will look like. 
+
+The violin plots show the density and distribution of ratings for each service feature across the three travel classes. For instance, "Seat Comfort" consistently shows higher density at ratings 4 and 5 across all travel classes, indicating that many customers rate this feature highly. The width of the violin plots at different rating levels indicates the variability in ratings. For example, "Cleanliness" shows a wider distribution in the Eco class, suggesting more varied customer opinions compared to the Business and Eco Plus classes. This means people in higher, more expensive classes seem to have a more collected response to how clean their experience was. Features like "Inflight Entertainment" and "On Board Service" have higher concentrations of ratings around 4 and 5, particularly in the Business class, indicating higher satisfaction levels.
+
+The box plots provide a view of the median ratings and the interquartile range for each of these service feature. For "Seat Comfort," the median rating is 4 across all travel classes, but the interquartile range varies, with the Eco class showing a broader range of ratings. The presence of outliers is more evident in the box plots, such as for "Cleanliness" in the Eco class, where lower ratings are more dispersed. The median ratings for "Inflight Entertainment" and "On Board Service" are higher in the Business class compared to Eco and Eco Plus, highlighting a consistent trend of higher satisfaction in the premium class.
+
+Business class tends to have higher and more consistent satisfaction ratings, especially for "Inflight Entertainment" and "On Board Service." In contrast, the Eco class shows more variability and lower median ratings for some features, indicating areas where improvements could be made. This suggests that the services provided in the Eco class might be perceived as worse compared to those in the Business class, which is reasonable considering the higher expectations and costs associated with premium travel classes.
+
+### General Satisfaction vs. Customer Demographics {.scrollable}
+
+These visualizations provide a comparative analysis of customer satisfaction ratings segmented by travel class, type of travel, and customer type.
+
+The stacked bar charts show the proportion of satisfied and unsatisfied customers in Business, Eco, and Eco Plus classes. Business class has the highest proportion of satisfied customers, followed by Eco Plus and then Eco class. Business travel has a higher proportion of satisfied customers compared to personal travel. This suggests that business travelers are generally more satisfied with the services provided. Loyal customers show a higher proportion of satisfaction compared to disloyal customers, indicating that repeat customers are generally happier with the services.
+
+The pie charts provides a similar view into the data, but with more specific numbers.  Business class shows a significantly higher proportion of satisfied customers (70.9%) compared to Eco Plus (42.7%) classes and Eco (39.4%).  Business travel has a higher satisfaction rate (58.4%) compared to personal travel (46.6%). Loyal customers have a satisfaction rate of 61.6%, while disloyal customers have a significantly lower satisfaction rate (24%).
+
+Business class consistently shows higher satisfaction rates compared to Eco and Eco Plus classes. This is likely because customers in the business class receive more premium services that meet their expectations. Customers traveling for business purposes are generally more satisfied compared to those traveling for personal reasons. This might be due to the fact that personal reasons is often related to relaxation and vacation, which might raise the traveling experience expectations. There is a clear correlation between customer loyalty and satisfaction. Loyal customers tend to have higher satisfaction rates, which suggests that consistent and reliable service can lead to higher customer retention and satisfaction.
+
+These visualizations highlight the differences in customer satisfaction across various segments. Business class and loyal customers show significantly higher satisfaction rates, indicating that premium services and consistent service quality can lead to higher customer satisfaction. On the other hand, the Eco class and disloyal customers show lower satisfaction rates, suggesting areas where improvements can be made to enhance the customer experience.
 
 :::
+
+
+## Conclusion {.scrollable}
+
+The analysis presented in this project offers several valuable insights into the factors influencing customer satisfaction within an airline. The ridge and density plots reveal that a satisfaction rating of 4 is consistently the most common across various service features. This suggests that while customers are generally satisfied with the services provided, there is room for improvement to achieve higher satisfaction levels. The violin and box plots highlight significant differences in satisfaction ratings across travel classes. Business class passengers consistently report higher satisfaction levels, particularly for services like Inflight Entertainment and On-Board Service. This disparity underscores the need for the airline to enhance the quality of services provided to Eco and Eco Plus passengers to bridge the satisfaction gap. The comparative analysis of satisfaction across different customer demographics reveals that business travelers and loyal customers exhibit higher satisfaction rates. This indicates that targeted improvements in services for personal travelers and strategies to foster customer loyalty could significantly enhance overall satisfaction.
+
+These graphs facilitate easy comparison across different segments, helping to identify specific areas of strength and opportunities for improvement. By visually representing the distribution and central tendencies of satisfaction ratings, stakeholders can quickly grasp the key insights and make informed decisions to enhance service quality.
+
+The findings highlight the importance of tailored service improvements across different travel classes and customer segments to achieve higher overall satisfaction. By leveraging these visual tools, the airline can strategically address areas of concern, optimize service offerings, and ultimately enhance the customer experience.
