@@ -13,3 +13,9 @@ This is the README file for my final STATS 302 Final Project.
 `data`: The initial data is here. 
 
 `codebook.csv`: This is the codebook. 
+
+## QMD 
+
+`Wang_Kimberly_Final_Project.qmd`: This is the final Quarto presentation. 
+
+`Wang_Kimberly_project_memo.qmd`: This is my project memo qmd. 
