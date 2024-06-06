@@ -68,7 +68,7 @@ density_plot <- ggplot(service_ratings_long, aes(x = Rating, fill = Service)) +
     legend.position = "bottom"
   )
 
-density_plot
+density_plot # not using density plot in final project, but keeping the code here 
 
 # Ridge plot
 ridge_plot <- ggplot(service_ratings_long, aes(x = Rating, y = Service, fill = Service)) +
@@ -168,7 +168,7 @@ facet_density_plot1 <- ggplot(first_half, aes(x = Rating, fill = Service)) +
   ) +
   facet_wrap(~ Service, scales = "fixed", nrow = 4, labeller = labeller(Service = service_labels))
 
-# Faceted density plots for the second half
+# facted density plots second half
 
 num_services <- length(service_labels)
 rainbow_colors <- rev(rainbow(num_services))
@@ -206,7 +206,7 @@ ggsave("facet_density_plot1.png", plot = facet_density_plot1, width = 15, height
 ggsave("facet_density_plot2.png", plot = facet_density_plot2, width = 15, height = 12)
 ####### FOR PLOT 2 #######
 
-# Select relevant columns including travel class and service ratings
+
 service_ratings_plot2 <- airline |> select(
   class,
   seat_comfort,
@@ -215,11 +215,11 @@ service_ratings_plot2 <- airline |> select(
   on_board_service
 )
 
-# Convert data to long format for ggplot2
+# convert data to so my life is easier 
 service_ratings_plot2_long <- service_ratings_plot2 |>
   pivot_longer(cols = -class, names_to = "Service", values_to = "Rating")
 
-# Create a named vector for better labels
+# better label 
 service_labels_plot2 <- c(
   seat_comfort = "Seat Comfort",
   cleanliness = "Cleanliness",
@@ -228,10 +228,11 @@ service_labels_plot2 <- c(
   on_board_service = "On Board Service"
 )
 
-# Update Service variable in service_ratings_plot2_long with better labels
+
 service_ratings_plot2_long <- service_ratings_plot2_long |>
   mutate(Service = factor(Service, levels = names(service_labels_plot2), labels = service_labels_plot2))
-# Define a custom color palette
+
+# colors 
 custom_colors <- c("Business" = "lightblue", "Eco" = "lightgreen", "Eco Plus" = "plum1")
 
 boxplot_plot <- ggplot(service_ratings_plot2_long, aes(x = class, y = Rating, fill = class)) +
@@ -256,7 +257,7 @@ boxplot_plot <- ggplot(service_ratings_plot2_long, aes(x = class, y = Rating, fi
   facet_wrap(~ Service, scales = "free_y") + 
   scale_fill_manual(values = custom_colors)
 
-# Create violin plots for each service category by travel class
+# violin plot
 violin_plot <- ggplot(service_ratings_plot2_long, aes(x = class, y = Rating, fill = class)) +
   geom_violin() +
   labs(
@@ -288,7 +289,7 @@ ggsave("violin_plot.png", plot = violin_plot, width = 15, height = 12)
 
 ##### PLOT NUMBER 3 #######
 
-# Select relevant columns for customer satisfaction and demographics
+
 satisfaction_data <- airline |> select(
   satisfaction,
   type_of_travel,
@@ -296,7 +297,6 @@ satisfaction_data <- airline |> select(
   customer_type
 )
 
-# Create a stacked bar chart for each demographic variable
 
 # Type of Travel
 
@@ -360,10 +360,8 @@ customer_type_plot <- ggplot(satisfaction_data, aes(x = customer_type, fill = sa
     legend.position = "none"
   )
 
-customer_type_plot
 
 
-# Display plots
 type_of_travel_plot
 class_plot
 customer_type_plot
@@ -371,7 +369,7 @@ customer_type_plot
 satisfaction_count <- airline |>
   count(satisfaction)
 
-# Create a bar plot for the total number of satisfied and unsatisfied customers
+# bar plot with count
 satisfaction_count_plot <- ggplot(satisfaction_count, aes(x = satisfaction, y = n, fill = satisfaction)) +
   geom_bar(stat = "identity", width = 0.7) +
   geom_text(aes(label = n), vjust = 1.5, color = "white", size = 5) +
@@ -483,7 +481,6 @@ class_pie
 
 
 # Customer Type
-# Aggregate the data
 
 satisfaction_data <- satisfaction_data |>
   mutate(customer_type = ifelse(customer_type == "disloyal Customer", "Disloyal Customer", customer_type))
@@ -518,14 +515,12 @@ customer_type_pie <- ggplot(customer_type_agg, aes(x = "", y = prop, fill = sati
     strip.text = element_text(size = 6.5)
   )
 
-# Display the plot
 customer_type_pie
 
 piecharts <- (class_pie / (type_of_travel_pie  + customer_type_pie)) + 
   plot_layout(guides = "collect") + 
   plot_annotation(title = "Customer Satisfaction Analysis Across Various Dimensions with Percentage Values")
 
-# Adjust the theme for the combined legend and title
 piecharts <- piecharts & theme(
   legend.position = "bottom",
   legend.title = element_text(size = 10),
